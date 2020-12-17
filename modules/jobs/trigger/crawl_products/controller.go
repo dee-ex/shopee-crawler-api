@@ -54,7 +54,7 @@ func HandleCrawl(w http.ResponseWriter, r *http.Request) {
   if from >= limit {
     from = 0
   }
-  if to == -1 || to > len(qrpmses)  || to <= from {
+  if to < 0 || to > len(qrpmses)  || to <= from {
     to = len(qrpmses)
   }
   var all_products []entities.Product
