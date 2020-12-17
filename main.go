@@ -9,11 +9,13 @@ import (
   "github.com/gorilla/mux"
   "github.com/gorilla/handlers"
   "github.com/dee-ex/shopee_crawler_api/modules/jobs/trigger/crawl_brands"
+  "github.com/dee-ex/shopee_crawler_api/modules/jobs/trigger/crawl_products"
 )
 
 func start_server() {
   router := mux.NewRouter().StrictSlash(true)
-  router.HandleFunc("/", crawl_brands.HandleCrawl).Methods("GET")
+  router.HandleFunc("/done", crawl_brands.HandleCrawl).Methods("GET")
+  router.HandleFunc("/", crawl_products.HandleCrawl).Methods("GET")
   c := cors.New(cors.Options{
     AllowedOrigins: []string{"*"},
     AllowedMethods: []string{http.MethodGet, http.MethodPost, http.MethodOptions},
