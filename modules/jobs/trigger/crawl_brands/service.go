@@ -46,6 +46,7 @@ func Crawl() ([]entities.Brand, error) {
   return brands, nil
 }
 
-func (service *Service) Create(brand *entities.Brand) error {
-  return service.repo.Create(brand)
+func (serv *Service) Create(brand *entities.Brand) error {
+  err := serv.repo.Create(brand)
+  return err
 }

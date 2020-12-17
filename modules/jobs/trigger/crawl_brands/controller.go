@@ -14,9 +14,13 @@ func HandleCrawl(w http.ResponseWriter, r *http.Request) {
     return
   }
   mysql := NewMySQLRepository()
-  service := NewService(mysql)
+  if mysql == nil {
+    http.Error(w, "Cannot connect to database", 500)
+    return
+  }
+  serv := NewService(mysql)
   for _, brand := range brands {
-    err = service.Create(&brand)
+    err = serv.Create(&brand)
     if err != nil {
       log.Println(err.Error())
     }

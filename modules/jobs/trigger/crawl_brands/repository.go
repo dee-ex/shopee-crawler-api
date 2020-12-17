@@ -25,5 +25,6 @@ func NewMySQLRepository() *MySQL {
 }
 
 func (repo *MySQL) Create(brand *entities.Brand) error {
-  return repo.db.Create(brand).Error
+  res := repo.db.Create(brand)
+  return res.Error
 }
