@@ -1,9 +1,15 @@
 package utils
 
 import (
+  "fmt"
   "net/http"
   "encoding/json"
 )
+
+func Respond(w http.ResponseWriter, status int, message string) {
+  w.WriteHeader(status)
+  fmt.Fprintf(w, message)
+}
 
 func RespondJSON(w http.ResponseWriter, status int, payload interface{}) {
   response, err := json.Marshal(payload)
