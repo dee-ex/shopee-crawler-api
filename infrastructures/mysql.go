@@ -10,7 +10,7 @@ func NewMySQLSession() (*gorm.DB, error) {
   password := "123qwe123qwe"
   host := "localhost"
   port := "3306"
-  dbname := "testt"
+  dbname := "test"
   dsn := username + ":" + password + "@tcp(" + host + ":" + port + ")/" + dbname
   db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
   if err != nil {
