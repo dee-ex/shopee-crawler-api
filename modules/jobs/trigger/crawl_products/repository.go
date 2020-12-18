@@ -12,6 +12,7 @@ type (
     GetShopidsAndUsernames(limit int) ([]QueryParameters, error)
     Create(product *entities.Product) error
   }
+
   MySQL struct {
     db *gorm.DB
   }
