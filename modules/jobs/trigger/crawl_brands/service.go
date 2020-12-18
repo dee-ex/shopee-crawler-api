@@ -28,11 +28,13 @@ func Crawl() ([]entities.Brand, error) {
   if res.StatusCode != 200 {
     return nil, errors.New(fmt.Sprintf("Status code error: %d %s", res.StatusCode, res.Status))
   }
+
   body, err := ioutil.ReadAll(res.Body)
   res.Body.Close()
   if err != nil {
     return nil, err
   }
+
   var raw_json JSONBrand
   var brands []entities.Brand
   json.Unmarshal(body, &raw_json)
@@ -41,6 +43,7 @@ func Crawl() ([]entities.Brand, error) {
     username := v.(map[string]interface{})["username"].(string)
     brand_name := v.(map[string]interface{})["brand_name"].(string)
     logo := v.(map[string]interface{})["logo"].(string)
+
     brands = append(brands, entities.Brand{0, shopid, username, brand_name, logo})
   }
   return brands, nil
