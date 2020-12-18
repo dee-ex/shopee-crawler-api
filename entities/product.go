@@ -2,6 +2,7 @@ package entities
 
 type (
   Product struct {
+    ID int
     Shopid uint64
     Itemid uint64
     PriceMax uint64
