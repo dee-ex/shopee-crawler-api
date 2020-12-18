@@ -1,6 +1,7 @@
 package brands
 
 import (
+  "errors"
 
   "github.com/dee-ex/shopee_crawler_api/entities"
 )
@@ -64,4 +65,36 @@ func (serv *Service) IsDuplicateUsername(username string) (bool, error) {
     return true, nil
   }
   return false, nil
+}
+
+func (serv *Service) Update(brand_id int, data BrandUpdate) error {
+  if data.BrandName != nil {
+    if *data.BrandName == "" {
+      return errors.New("Brandname cannot be empty")
+    }
+    err := serv.repo.UpdateBrandName(brand_id, *data.BrandName)
+    if err != nil {
+      return err
+    }
+  }
+
+  if data.Logo != nil {
+    if *data.Logo == "" {
+      return errors.New("Logo cannot be empty")
+    }
+    err := serv.repo.UpdateLogo(brand_id, *data.Logo)
+    if err != nil {
+      return err
+    }
+  }
+
+  return nil
+}
+
+func (serv *Service) Delete(brand_id int) error {
+  err := serv.repo.Delete(brand_id)
+  if err != nil {
+    return err
+  }
+  return nil
 }

@@ -14,7 +14,11 @@ type (
     GetBrandByID(brand_id int) (*entities.Brand, error)
     GetBrandByShopid(shopid uint64) (*entities.Brand, error)
     GetBrandByUsername(username string) (*entities.Brand, error)
+    UpdateBrandName(brand_id int, brandname string) error
+    UpdateLogo(brand_id int, logo string) error
+    Delete(brand_id int) error
   }
+
   MySQL struct {
     db *gorm.DB
   }
@@ -55,4 +59,19 @@ func (repo *MySQL) GetBrandByUsername(username string) (*entities.Brand, error) 
   var brand entities.Brand
   res := repo.db.Where("username = ?", username).Find(&brand)
   return &brand, res.Error
+}
+
+func (repo *MySQL) UpdateBrandName(brand_id int, brandname string) error {
+  res := repo.db.Model(&entities.Brand{}).Where("id = ?", brand_id).Update("brand_name", brandname)
+  return res.Error
+}
+
+func (repo *MySQL) UpdateLogo(brand_id int, logo string) error {
+  res := repo.db.Model(&entities.Brand{}).Where("id = ?", brand_id).Update("logo", logo)
+  return res.Error
+}
+
+func (repo *MySQL) Delete(brand_id int) error {
+  res := repo.db.Where("id = ?", brand_id).Delete(&entities.Brand{})
+  return res.Error
 }
