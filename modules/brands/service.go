@@ -93,8 +93,5 @@ func (serv *Service) Update(brand_id int, data BrandUpdate) error {
 
 func (serv *Service) Delete(brand_id int) error {
   err := serv.repo.Delete(brand_id)
-  if err != nil {
-    return err
-  }
-  return nil
+  return err
 }
