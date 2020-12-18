@@ -41,7 +41,7 @@ func Crawl() ([]entities.Brand, error) {
     username := v.(map[string]interface{})["username"].(string)
     brand_name := v.(map[string]interface{})["brand_name"].(string)
     logo := v.(map[string]interface{})["logo"].(string)
-    brands = append(brands, entities.Brand{shopid, username, brand_name, logo})
+    brands = append(brands, entities.Brand{0, shopid, username, brand_name, logo})
   }
   return brands, nil
 }

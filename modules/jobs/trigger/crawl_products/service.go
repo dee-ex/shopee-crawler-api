@@ -69,7 +69,7 @@ func Crawl(shopid uint64, username string) ([]entities.Product, error) {
         rating += fmt.Sprintf("%0.f", r.(float64)) + "-"
       }
       rating = rating[:len(rating) - 1]
-      products = append(products, entities.Product{shopid, itemid, pricemax, pricemin, name, images, historical_sold, rating})
+      products = append(products, entities.Product{0, shopid, itemid, pricemax, pricemin, name, images, historical_sold, rating})
     }
     offset += limit
   }
