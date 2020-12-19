@@ -2,34 +2,14 @@ package crawl_products
 
 import (
   "log"
-  "strconv"
   "net/http"
 
   "github.com/dee-ex/shopee_crawler_api/utils"
   "github.com/dee-ex/shopee_crawler_api/entities"
 )
 
-func GetLimit(r *http.Request) int {
-  limit_query, ok := r.URL.Query()["limit"]
-  if !ok {
-    return 5
-  }
-  limit, err := strconv.Atoi(limit_query[0])
-  if err != nil {
-    return 5
-  }
-  return limit
-}
-
 func GetFrom(r *http.Request, _max int) int {
-  from_query, ok := r.URL.Query()["from"]
-  if !ok {
-    return 0
-  }
-  from, err := strconv.Atoi(from_query[0])
-  if err != nil {
-    return 0
-  }
+  from :=  utils.GetNumericQuery(r, "from", 0)
   if from >= _max {
     return 0
   }
@@ -37,14 +17,7 @@ func GetFrom(r *http.Request, _max int) int {
 }
 
 func GetTo(r *http.Request, _max, from int) int {
-  to_query, ok := r.URL.Query()["to"]
-  if !ok {
-    return _max
-  }
-  to, err := strconv.Atoi(to_query[0])
-  if err != nil {
-    return _max
-  }
+  to :=  utils.GetNumericQuery(r, "to", _max)
   if to > _max || to <= from {
     return _max
   }
@@ -53,7 +26,7 @@ func GetTo(r *http.Request, _max, from int) int {
 
 func HandleCrawl(w http.ResponseWriter, r *http.Request) {
   // limit -1 if we want to select without limit
-  limit := GetLimit(r)
+  limit := utils.GetNumericQuery(r, "limit", 5)
 
   mysql := NewMySQLRepository()
   if mysql == nil {
