@@ -81,7 +81,7 @@ func Crawl(shopid uint64, username string) ([]entities.Product, error) {
       }
       images = images[:len(images) - 1]
 
-      historical_sold := uint32(item["historical_sold"].(float64))
+      historical_sold := int(item["historical_sold"].(float64))
 
       rating := ""
       for _, r := range item["item_rating"].(map[string]interface{})["rating_count"].([]interface{}) {
