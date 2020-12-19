@@ -23,6 +23,7 @@ func start_server() {
   router.HandleFunc("/brands/{brand_id}", brands.HandleGetBrandByID).Methods("GET")
   router.HandleFunc("/brands/{brand_id}", brands.HandleUpdateByID).Methods("PUT")
   router.HandleFunc("/brands/{brand_id}", brands.HandleDeleteByID).Methods("DELETE")
+  router.HandleFunc("/brands/{brand_id}/products", brands.HandleGetAllProducts).Methods("GET")
 
   router.HandleFunc("/products", products.HandleCreateProduct).Methods("POST")
   router.HandleFunc("/products", products.HandleGetAllProducts).Methods("GET")

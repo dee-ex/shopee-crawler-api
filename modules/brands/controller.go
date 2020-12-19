@@ -175,3 +175,36 @@ func HandleDeleteByID(w http.ResponseWriter, r *http.Request) {
   }
   utils.Respond(w, http.StatusOK, "Deleted successfully")
 }
+
+func HandleGetAllProducts(w http.ResponseWriter, r *http.Request) {
+  vars := mux.Vars(r)
+  brand_id, err := strconv.Atoi(vars["brand_id"])
+  if err != nil {
+    http.Error(w, err.Error(), 403)
+    return
+  }
+
+  mysql := NewMySQLRepository()
+  if mysql == nil {
+    http.Error(w, "Cannot connect to database", 500)
+    return
+  }
+  serv := NewService(mysql)
+
+  brand, err := serv.GetBrandByID(brand_id)
+  if err != nil {
+    http.Error(w, err.Error(), 500)
+    return
+  }
+  if brand.ID == 0 {
+    http.Error(w, "Not found", 404)
+    return
+  }
+
+  products, err := serv.GetAllProducts(brand.Shopid)
+  if err != nil {
+    http.Error(w, err.Error(), 500)
+    return
+  }
+  utils.RespondJSON(w, http.StatusOK, products)
+}

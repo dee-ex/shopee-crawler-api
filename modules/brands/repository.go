@@ -17,6 +17,7 @@ type (
     UpdateBrandName(brand_id int, brandname string) error
     UpdateLogo(brand_id int, logo string) error
     Delete(brand_id int) error
+    GetAllProducts(shopid uint64) ([]entities.Product, error)
   }
 
   MySQL struct {
@@ -74,4 +75,10 @@ func (repo *MySQL) UpdateLogo(brand_id int, logo string) error {
 func (repo *MySQL) Delete(brand_id int) error {
   res := repo.db.Where("id = ?", brand_id).Delete(&entities.Brand{})
   return res.Error
+}
+
+func (repo *MySQL) GetAllProducts(shopid uint64) ([]entities.Product, error) {
+  var products []entities.Product
+  res := repo.db.Where("shopid = ?", shopid).Find(&products)
+  return products, res.Error
 }

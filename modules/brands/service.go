@@ -95,3 +95,8 @@ func (serv *Service) Delete(brand_id int) error {
   err := serv.repo.Delete(brand_id)
   return err
 }
+
+func (serv *Service) GetAllProducts(shopid uint64) ([]entities.Product, error) {
+  products, err := serv.repo.GetAllProducts(shopid)
+  return products, err
+}
