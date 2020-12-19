@@ -16,6 +16,10 @@ func HandleCreateBrand(w http.ResponseWriter, r *http.Request) {
     http.Error(w, err.Error(), 400)
     return
   }
+  if data.Shopid == 0 {
+    http.Error(w, "Empty shopid", 400)
+    return
+  }
   if len(data.Username)*len(data.BrandName) == 0 {
     http.Error(w, "Empty username or brandname", 400)
     return
