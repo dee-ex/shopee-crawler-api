@@ -9,6 +9,7 @@ import (
   "github.com/gorilla/mux"
   "github.com/gorilla/handlers"
   "github.com/dee-ex/shopee_crawler_api/modules/brands"
+  "github.com/dee-ex/shopee_crawler_api/modules/products"
   "github.com/dee-ex/shopee_crawler_api/modules/jobs/trigger/crawl_brands"
   "github.com/dee-ex/shopee_crawler_api/modules/jobs/trigger/crawl_products"
 )
@@ -22,6 +23,12 @@ func start_server() {
   router.HandleFunc("/brands/{brand_id}", brands.HandleGetBrandByID).Methods("GET")
   router.HandleFunc("/brands/{brand_id}", brands.HandleUpdateByID).Methods("PUT")
   router.HandleFunc("/brands/{brand_id}", brands.HandleDeleteByID).Methods("DELETE")
+
+  router.HandleFunc("/products", products.HandleCreateProduct).Methods("POST")
+  router.HandleFunc("/products", products.HandleGetAllProducts).Methods("GET")
+  router.HandleFunc("/products/{product_id}", products.HandleGetProductByID).Methods("GET")
+  router.HandleFunc("/products/{product_id}", products.HandleUpdateByID).Methods("PUT")
+  router.HandleFunc("/products/{product_id}", products.HandleDeleteByID).Methods("DELETE")
 
   router.HandleFunc("/jobs/trigger/crawl_brands", crawl_brands.HandleCrawl).Methods("GET")
   router.HandleFunc("/jobs/trigger/crawl_products", crawl_products.HandleCrawl).Methods("GET")
