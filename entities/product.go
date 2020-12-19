@@ -9,7 +9,7 @@ type (
     PriceMin uint64
     Name string
     Images string
-    HistoricalSold int
+    HistoricalSold uint32
     Rating string
   }
 )
