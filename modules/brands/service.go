@@ -73,7 +73,9 @@ func (serv *Service) Update(brand_id int, data BrandUpdate) error {
       return errors.New("Brandname cannot be empty")
     }
     err := serv.repo.UpdateBrandName(brand_id, *data.BrandName)
-    return err
+    if err != nil {
+      return err
+    }
   }
 
   if data.Logo != nil {
@@ -81,7 +83,9 @@ func (serv *Service) Update(brand_id int, data BrandUpdate) error {
       return errors.New("Logo cannot be empty")
     }
     err := serv.repo.UpdateLogo(brand_id, *data.Logo)
-    return err
+    if err != nil {
+      return err
+    }
   }
 
   return nil
