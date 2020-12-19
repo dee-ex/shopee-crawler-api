@@ -9,29 +9,6 @@ import (
   "github.com/dee-ex/shopee_crawler_api/utils"
 )
 
-type (
-  ProductCreation struct {
-    Shopid uint64
-    Itemid uint64
-    PriceMax uint64
-    PriceMin uint64
-    Name string
-    Images string
-    HistoricalSold uint32
-    Rating string
-  }
-
-  ProductUpdate struct {
-    Shopid *uint64
-    PriceMax *uint64
-    PriceMin *uint64
-    Name *string
-    Images *string
-    HistoricalSold *uint32
-    Rating *string
-  }
-)
-
 func HandleCreateProduct(w http.ResponseWriter, r *http.Request) {
   var data ProductCreation
   err := json.NewDecoder(r.Body).Decode(&data)
