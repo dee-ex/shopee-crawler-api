@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS brands (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  shopid BIGINT,
+  username VARCHAR(255),
+  brand_name VARCHAR(255),
+  logo VARCHAR(255)
+);
