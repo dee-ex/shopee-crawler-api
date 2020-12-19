@@ -6,7 +6,7 @@ import (
 )
 
 func GetNumericQuery(r *http.Request, key string, _default int) int {
-  value_query, ok := r.URL.Query()["key"]
+  value_query, ok := r.URL.Query()[key]
   if !ok {
     return _default
   }
