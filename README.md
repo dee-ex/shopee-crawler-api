@@ -1,7 +1,12 @@
 # Shopee Crawler API
 It is an API helps you crawl data from https://shopee.vn/ about **brands** & **products** and save them to database which you can access later by also this one.
 # Usage
-First, you need to config database in `env\database.env`. Here is an example:
+Fistly, we have to care about database migration. Supposed you're a MySQL user then:
+```
+migrate -database "mysql://username:password@tcp(yourhost:port)/databasename" -path migrations up
+```
+By `migrations` folder, you can easily `up` and `down`.  
+Secondly, you need to config database in `env\database.env`. Here is an example:
 ```
 DATABASE_CONFIGURED = "YES"
 DATABASE_USERNAME = "MY_USERNAME"
@@ -11,10 +16,11 @@ DATABASE_PORT = "9998"
 DATABASE_MAINDATABASENAME = "MAIN"
 DATABASE_TESTDATABASENAME = "TEST"
 ```
-After that, run the server:
+Lastly, run the server:
 ```
 go run .
 ```
+Running port is changeable in `env/server.env`.
 # Test
 Use the following commands:
 ```
