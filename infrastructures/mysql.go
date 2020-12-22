@@ -2,11 +2,15 @@ package infrastructures
 
 import (
   "os"
+  "log"
   "gorm.io/gorm"
   "gorm.io/driver/mysql"
+
+  "github.com/joho/godotenv"
 )
 
-func NewMySQLSession(dbname string) (*gorm.DB, error) {
+
+func OpenMySQLSession(dbname string) (*gorm.DB, error) {
   username := os.Getenv("DATABASE_USERNAME")
   password := os.Getenv("DATABASE_PASSWORD")
   host := os.Getenv("DATABASE_HOST")
@@ -17,7 +21,6 @@ func NewMySQLSession(dbname string) (*gorm.DB, error) {
   if err != nil {
     return nil, err
   }
-
   mysql_db, err := db.DB()
   if err != nil {
     return nil, err
@@ -27,4 +30,19 @@ func NewMySQLSession(dbname string) (*gorm.DB, error) {
   mysql_db.SetConnMaxLifetime(15)
 
   return db, nil
+}
+
+func NewMySQLSession() (*gorm.DB, error) {
+  return OpenMySQLSession(os.Getenv("DATABASE_MAINDATABASENAME"))
+}
+
+func NewMockMySQLSession() (*gorm.DB, error) {
+  err := godotenv.Load("../../env/database.env")
+  if err != nil {
+    log.Fatal("Error loading database.env file")
+  }
+  if os.Getenv("DATABASE_CONFIGURED") == "NO" {
+    log.Fatal("Database is not configured yet")
+  }
+  return OpenMySQLSession(os.Getenv("DATABASE_TESTDATABASENAME"))
 }

@@ -14,7 +14,7 @@ type (
 )
 
 func NewMockMySQLRepository() *MockMySQL {
-  db, err := infrastructures.NewMySQLSession("testt")
+  db, err := infrastructures.NewMockMySQLSession()
   if err != nil {
     return nil
   }
