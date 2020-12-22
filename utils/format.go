@@ -17,6 +17,7 @@ func RespondJSON(w http.ResponseWriter, status int, payload interface{}) {
     http.Error(w, err.Error(), 500)
     return
   }
+
   w.Header().Set("Content-Type", "application/json")
   w.WriteHeader(status)
   w.Write([]byte(response))

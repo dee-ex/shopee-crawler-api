@@ -10,9 +10,11 @@ func GetNumericQuery(r *http.Request, key string, _default int) int {
   if !ok {
     return _default
   }
+
   value, err := strconv.Atoi(value_query[0])
   if err != nil {
     return _default
   }
+
   return value
 }
