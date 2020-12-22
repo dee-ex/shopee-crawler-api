@@ -5,12 +5,11 @@ import (
   "gorm.io/driver/mysql"
 )
 
-func NewMySQLSession() (*gorm.DB, error) {
+func NewMySQLSession(dbname string) (*gorm.DB, error) {
   username := "root"
   password := "123qwe123qwe"
   host := "localhost"
   port := "3306"
-  dbname := "test"
   dsn := username + ":" + password + "@tcp(" + host + ":" + port + ")/" + dbname
   db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
   if err != nil {
