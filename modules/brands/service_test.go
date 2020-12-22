@@ -215,3 +215,25 @@ func TestDelete(t *testing.T) {
     t.Error("Fail to delete brand")
   }
 }
+
+func TestGetAllProducts(t *testing.T) {
+  mock := NewMockMySQLRepository()
+  if mock == nil {
+    t.Fatal("Cannot connect to database")
+  }
+  serv := NewService(mock)
+
+  brands, err := serv.GetAllBrands()
+  if err != nil {
+    t.Fatal("Server error")
+  }
+
+  testbrand := brands[0]
+  products, err := serv.GetAllProducts(testbrand.Shopid)
+  if err != nil {
+    t.Fatal("Server error")
+  }
+  if len(products) == 0 {
+    t.Errorf("Fail to get all product of Shopid: %d", testbrand.Shopid)
+  }
+}
