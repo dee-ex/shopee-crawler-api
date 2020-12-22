@@ -6,6 +6,7 @@ import (
   "net/http"
 
   "github.com/rs/cors"
+  "github.com/joho/godotenv"
   "github.com/gorilla/mux"
   "github.com/gorilla/handlers"
   "github.com/dee-ex/shopee_crawler_api/modules/brands"
@@ -42,10 +43,23 @@ func start_server() {
   enhanced_router := c.Handler(router)
   enhanced_router = handlers.LoggingHandler(os.Stdout, enhanced_router)
 
-  log.Fatal(http.ListenAndServe(":8080", enhanced_router))
+  log.Fatal(http.ListenAndServe(":" + os.Getenv("SERVER_PORT"), enhanced_router))
 }
 
 func main() {
-  log.Println("Hosting: Local server: localhost:8080")
+  err := godotenv.Load("env/database.env")
+  if err != nil {
+    log.Fatal("Error loading database.env file")
+  }
+  if os.Getenv("DATABASE_CONFIGURED") == "NO" {
+    log.Fatal("Database is not configured yet")
+  }
+
+  err = godotenv.Load("env/server.env")
+  if err != nil {
+    log.Fatal("Error loading server.env file")
+  }
+
+  log.Println("Hosting: Local server: localhost:" + os.Getenv("SERVER_PORT"))
   start_server()
 }
