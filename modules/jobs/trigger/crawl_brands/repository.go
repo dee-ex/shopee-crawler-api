@@ -17,7 +17,7 @@ type (
 )
 
 func NewMySQLRepository() *MySQL {
-  db, err := infrastructures.NewMySQLSession()
+  db, err := infrastructures.NewMySQLSession("test")
   if err != nil {
     return nil
   }
