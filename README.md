@@ -1,4 +1,7 @@
 # Shopee Crawler API
+[![goversion](https://img.shields.io/badge/Go-v1.14.4-blue)](https://golang.org/)
+[![mysqlversion](https://img.shields.io/badge/mysql-v8.0.22-blue)](https://mysql.com/)
+
 It is an API helps you crawl data from https://shopee.vn/ about **brands** & **products** and save them to database which you can access later by also this one.
 # Table of contents
 * [Installation](#installation)
@@ -27,7 +30,7 @@ Fistly, we have to care about database migration. Supposed you're a MySQL user t
 migrate -database "mysql://username:password@tcp(yourhost:port)/databasename" -path migrations up
 ```
 Folder `migrations` was prepared for purposes that you can easily `up` and `down` version of your database.  
-Last, you need to config database in `env\database.env`. Here is an example:
+Lastly, you need to config database in `env\database.env`. Here is an example:
 ```
 DATABASE_CONFIGURED = "YES"
 DATABASE_USERNAME = "MY_USERNAME"
