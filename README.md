@@ -34,7 +34,8 @@ Crawl all brands from https://shopee.vn/mall/brands and return as JSON.
 /jobs/trigger/crawl_brands
 ```
 ## Crawl Products
-Crawl all products of all brands from https://shopee.vn/each_brand_username and return as JSON (maximum return is `1000`). This process can be adjusted by query parameters.
+Crawl all products of all brands from https://shopee.vn/each_brand_username and return as JSON (maximum return is `1000`).  
+This process can be adjusted by query parameters.
 ```
 /jobs/trigger/crawl_products?limit=X&from=Y&to=Z
 ```
