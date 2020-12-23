@@ -1,26 +1,55 @@
 # Shopee Crawler API
 It is an API helps you crawl data from https://shopee.vn/ about **brands** & **products** and save them to database which you can access later by also this one.
-# Usage
+# Table of contents
+* [Installation](#installation)
+* [Usage](#usage)
+* [Test](#test)
+* [Route Details](#route-details)
+    * [Crawl Brands](#crawl-brands)
+    * [Crawl Products](#crawl-products)
+    * [Crawl Products of a Brand](#crawl-products-of-a-brand)
+    * [Endpoint `brands`](#endpoint-brands)
+        * [Create a Brand (POST)](#create-a-brand-post)
+        * [Get All Brands (GET)](#get-all-brands-get)
+        * [Get Detail a Brand (GET)](#get-detail-a-brand-get)
+        * [Update a Brand (PUT)](#update-a-brand-put)
+        * [Delete a Brand (DELETE)](#delete-a-brand-delete)
+        * [Get All Products of a Brand (GET)](#get-all-products-of-a-brand-get)
+    * [Endpoint `products`](#endpoint-products)
+        * [Create a Product (POST)](#create-a-product-post)
+        * [Get All Products (GET)](#get-all-products-get)
+        * [Get Detail a Product (GET)](#get-detail-a-product-get)
+        * [Update a Product (PUT)](#update-a-product-put)
+        * [Delete a Product (DELETE)](#delete-a-product-delete)
+# Installation
 Fistly, we have to care about database migration. Supposed you're a MySQL user then:
 ```
 migrate -database "mysql://username:password@tcp(yourhost:port)/databasename" -path migrations up
 ```
-By `migrations` folder, you can easily `up` and `down`.  
-Secondly, you need to config database in `env\database.env`. Here is an example:
+Folder `migrations` was prepared for purposes that you can easily `up` and `down` version of your database.  
+Last, you need to config database in `env\database.env`. Here is an example:
 ```
 DATABASE_CONFIGURED = "YES"
 DATABASE_USERNAME = "MY_USERNAME"
 DATABASE_PASSWORD = "MY_PASSWORD"
 DATABASE_HOST = "LOCALHOST"
-DATABASE_PORT = "9998"
+DATABASE_PORT = "3306"
 DATABASE_MAINDATABASENAME = "MAIN"
 DATABASE_TESTDATABASENAME = "TEST"
 ```
-Lastly, run the server:
+# Usage
+Run your local server:
 ```
 go run .
 ```
+Result should be appear:
+```
+yyyy/mm/dd hh:mm:ss Hosting: Local server: localhost:8080
+```
 Running port is changeable in `env/server.env`.
+```
+SERVER_PORT = "8080"
+```
 # Test
 Use the following commands:
 ```
