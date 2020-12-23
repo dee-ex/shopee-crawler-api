@@ -73,7 +73,7 @@ func TestGetBrandByShopid(t *testing.T) {
   }
   serv := NewService(mock)
 
-  brand, err := serv.GetBrandByShopid(10)
+  brand, err := serv.GetBrandByShopid(0)
   if err != nil {
     t.Fatal("Server error")
   }
@@ -122,7 +122,7 @@ func TestIsDuplicateShopid(t *testing.T) {
   }
   serv := NewService(mock)
 
-  dup, err := serv.IsDuplicateShopid(10)
+  dup, err := serv.IsDuplicateShopid(0)
   if err != nil {
     t.Fatal("Server error")
   }

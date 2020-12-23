@@ -82,7 +82,7 @@ func TestGetProductByItemid(t *testing.T) {
   }
   serv := NewService(mock)
 
-  product, err := serv.GetProductByItemid(10)
+  product, err := serv.GetProductByItemid(0)
   if err != nil {
     t.Fatal("Server error")
   }
@@ -106,7 +106,7 @@ func TestIsDuplicateItemid(t *testing.T) {
   }
   serv := NewService(mock)
 
-  dup, err := serv.IsDuplicateItemid(10)
+  dup, err := serv.IsDuplicateItemid(0)
   if err != nil {
     t.Fatal("Server error")
   }
