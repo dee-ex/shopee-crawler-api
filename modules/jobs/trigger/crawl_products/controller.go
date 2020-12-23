@@ -4,6 +4,7 @@ import (
   "log"
   "net/http"
 
+  "github.com/gorilla/mux"
   "github.com/dee-ex/shopee_crawler_api/utils"
   "github.com/dee-ex/shopee_crawler_api/entities"
 )
@@ -24,7 +25,7 @@ func GetTo(r *http.Request, _max, from int) int {
   return to
 }
 
-func HandleCrawl(w http.ResponseWriter, r *http.Request) {
+func HandleCrawlProducts(w http.ResponseWriter, r *http.Request) {
   // limit -1 if we want to select without limit
   limit := utils.GetNumericQuery(r, "limit", 5)
 
@@ -71,4 +72,38 @@ func HandleCrawl(w http.ResponseWriter, r *http.Request) {
     }
   }
   utils.RespondJSON(w, http.StatusOK, all_products)
+}
+
+func HandleCrawlByUsername(w http.ResponseWriter, r *http.Request) {
+  vars := mux.Vars(r)
+
+  mysql := NewMySQLRepository()
+  if mysql == nil {
+    http.Error(w, "Cannot connect to database.", 500)
+    return
+  }
+  serv := NewService(mysql)
+
+  shopid, err := serv.GetShopidByUsername(vars["brand_username"])
+  if err != nil {
+    http.Error(w, err.Error(), 500)
+    return
+  }
+  if shopid == 0 {
+    http.Error(w, "Not found", 404)
+    return
+  }
+
+  products, err := Crawl(shopid, vars["brand_username"])
+  if err != nil {
+    log.Fatal(err.Error())
+  }
+
+  for _, product := range products {
+    err = serv.Create(&product)
+    if err != nil {
+      log.Println(err.Error())
+    }
+  }
+  utils.RespondJSON(w, http.StatusOK, products)
 }

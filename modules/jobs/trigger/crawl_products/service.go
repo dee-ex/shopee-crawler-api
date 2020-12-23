@@ -101,6 +101,11 @@ func (serv *Service) GetShopidsAndUsernames(limit int) ([]QueryParameters, error
   return qrpmses, err
 }
 
+func (serv *Service) GetShopidByUsername(username string) (uint64, error) {
+  shopid, err := serv.repo.GetShopidByUsername(username)
+  return shopid, err
+}
+
 func (serv *Service) Create(product *entities.Product) error {
   err := serv.repo.Create(product)
   return err

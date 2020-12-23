@@ -10,6 +10,7 @@ import (
 type (
   Repository interface {
     GetShopidsAndUsernames(limit int) ([]QueryParameters, error)
+    GetShopidByUsername(username string) (uint64, error)
     Create(product *entities.Product) error
   }
 
@@ -30,6 +31,12 @@ func (repo *MySQL) GetShopidsAndUsernames(limit int) ([]QueryParameters, error) 
   var qrpmses []QueryParameters
   res := repo.db.Model(&entities.Brand{}).Select("shopid", "username").Limit(limit).Find(&qrpmses)
   return qrpmses, res.Error
+}
+
+func (repo *MySQL) GetShopidByUsername(username string) (uint64, error) {
+  var shopid uint64
+  res := repo.db.Model(&entities.Brand{}).Where("username = ?", username).Select("shopid").Find(&shopid)
+  return shopid, res.Error
 }
 
 func (repo *MySQL) Create(product *entities.Product) error {

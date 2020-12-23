@@ -4,6 +4,7 @@ import (
   "os"
   "log"
   "net/http"
+  "strings"
 
   "github.com/rs/cors"
   "github.com/joho/godotenv"
@@ -33,7 +34,9 @@ func start_server() {
   router.HandleFunc("/products/{product_id}", products.HandleDeleteByID).Methods("DELETE")
 
   router.HandleFunc("/jobs/trigger/crawl_brands", crawl_brands.HandleCrawl).Methods("GET")
-  router.HandleFunc("/jobs/trigger/crawl_products", crawl_products.HandleCrawl).Methods("GET")
+
+  router.HandleFunc("/jobs/trigger/crawl_products", crawl_products.HandleCrawlProducts).Methods("GET")
+  router.HandleFunc("/jobs/trigger/crawl_products/{brand_username}/", crawl_products.HandleCrawlByUsername).Methods("GET")
 
 
   c := cors.New(cors.Options{
@@ -51,7 +54,7 @@ func main() {
   if err != nil {
     log.Fatal("Error loading database.env file")
   }
-  if os.Getenv("DATABASE_CONFIGURED") == "NO" {
+  if strings.ToUpper(os.Getenv("DATABASE_CONFIGURED")) != "YES" {
     log.Fatal("Database is not configured yet")
   }
 

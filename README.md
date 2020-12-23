@@ -29,14 +29,19 @@ go test github.com/dee-ex/shopee_crawler_api/modules/products
 ```
 # Route Details
 ## Crawl Brands
-Crawl all brands from https://shopee.vn/mall/brands.
+Crawl all brands from https://shopee.vn/mall/brands and return as JSON.
 ```
 /jobs/trigger/crawl_brands
 ```
 ## Crawl Products
-Crawl all products from https://shopee.vn/username. Can adjust by query parameters.
+Crawl all products of all brands from https://shopee.vn/each_brand_username and return as JSON (maximum return is `1000`). This process can be adjusted by query parameters.
 ```
 /jobs/trigger/crawl_products?limit=X&from=Y&to=Z
+```
+## Crawl Products of a Brand
+Crawl all products of a specific brand username.
+```
+/jobs/trigger/crawl_products/{brand_username}
 ```
 ## Endpoint `brands`
 ### Create a Brand (POST)
