@@ -8,8 +8,8 @@ It is an API helps you crawl data from https://shopee.vn/ about **brands** & **p
 * [Usage](#usage)
 * [Test](#test)
 * [Route Details](#route-details)
-    * [Crawl Brands](#crawl-brands)
-    * [Crawl Products](#crawl-products)
+    * [Crawl Brands](#crawl-all-brands)
+    * [Crawl Products](#crawl-all-products)
     * [Crawl Products of a Brand](#crawl-products-of-a-brand)
     * [Endpoint `brands`](#endpoint-brands)
         * [Create a Brand (POST)](#create-a-brand-post)
@@ -60,12 +60,12 @@ go test github.com/dee-ex/shopee_crawler_api/modules/brands
 go test github.com/dee-ex/shopee_crawler_api/modules/products
 ```
 # Route Details
-## Crawl Brands
+## Crawl All Brands
 Crawl all brands from https://shopee.vn/mall/brands and return as JSON.
 ```
 /jobs/trigger/crawl_brands
 ```
-## Crawl Products
+## Crawl All Products
 Crawl all products of all brands from https://shopee.vn/each_brand_username and return as JSON (maximum return is `1000`).  
 This process can be adjusted by query parameters.
 ```
@@ -84,10 +84,10 @@ Crawl all products of a specific brand username.
 Create a new brand from data containing in body of request, save it to database and return as JSON.
 ```
 {
-    "Shopid": 999999,
-    "Username": "testusername",
-    "BrandName": "testbrandname",
-    "Logo": "testlogo"
+  "Shopid": 999999,
+  "Username": "testusername",
+  "BrandName": "testbrandname",
+  "Logo": "testlogo"
 }
 ```
 ### Get All Brands (GET)
@@ -107,8 +107,8 @@ Get detail a brand by ID and return as JSON.
 Update a brand by ID. Updated data containing in body of request. Arguments are not required.
 ```
 {
-    "BrandName": "updatebrandname",
-    "Logo": "testlogo"
+  "BrandName": "updatebrandname",
+  "Logo": "testlogo"
 }
 ```
 ### Delete a Brand (DELETE)
@@ -129,14 +129,14 @@ Get all products of a specific brand and return as JSON.
 Create a new product from data containing in body of request, save it to database and return as JSON.
 ```
 {
-    "Shopid": 999999
-    "Itemid": 999998
-    "PriceMax": 999997
-    "PriceMin": 999996
-    "Name": "testname"
-    "Images": "testimage"
-    "HistoricalSold": 999995
-    "Rating": "testrating"
+  "Shopid": 999999
+  "Itemid": 999998
+  "PriceMax": 999997
+  "PriceMin": 999996
+  "Name": "testname"
+  "Images": "testimage"
+  "HistoricalSold": 999995
+  "Rating": "testrating"
 }
 ```
 ### Get All Products (GET)
@@ -156,13 +156,13 @@ Get detail a product by ID and return as JSON.
 Update a product by ID. Updated data containing in body of request. Arguments are not required.
 ```
 {
-    "Shopid": 999994
-    "PriceMax": 999993
-    "PriceMin": 999992
-    "Name": "updatename"
-    "Images": "updateimages"
-    "HistoricalSold": 999991
-    "Rating": "updaterating"
+  "Shopid": 999994
+  "PriceMax": 999993
+  "PriceMin": 999992
+  "Name": "updatename"
+  "Images": "updateimages"
+  "HistoricalSold": 999991
+  "Rating": "updaterating"
 }
 ```
 ### Delete a Product (DELETE)
