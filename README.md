@@ -45,7 +45,7 @@ Run your local server:
 ```
 go run .
 ```
-Result should be appear:
+Result should be appeared:
 ```
 yyyy/mm/dd hh:mm:ss Hosting: Local server: localhost:8080
 ```
