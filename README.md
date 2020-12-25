@@ -1,6 +1,6 @@
 # Shopee Crawler API
 [![goversion](https://img.shields.io/badge/Go-v1.14.4-blue)](https://golang.org/)
-[![mysqlversion](https://img.shields.io/badge/mysql-v8.0.22-blue)](https://mysql.com/)
+[![mysqlversion](https://img.shields.io/badge/MySQL-v8.0.22-blue)](https://mysql.com/)
 
 It is an API helps you crawl data from https://shopee.vn/ about **brands** & **products** and save them to database which you can access later by also this one.
 # Table of contents
